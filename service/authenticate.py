@@ -124,10 +124,3 @@ def get_access_token_oath2_certificate(client_id, tenant_id, target_host, privat
         logger.error("Unexpected response text: {}".format(result))
         raise AssertionError    
     return result
-
-#y = get_access_token_basic_auth("erik.leven@sesaminternaltesting.onmicrosoft.com", "Bibbla87")
-#print(get_access_token_oath2_certificate(client_id, "key.pem", thumbprint, tenant_id, target_host))
-
-#access_token = get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_host)
-#print(access_token)
-
