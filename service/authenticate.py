@@ -40,12 +40,6 @@ logger.addHandler(stdout_handler)
 logger.setLevel(logging.DEBUG)
 
 
-#client_id           = "be546248-254d-4a0b-8a3d-2520228b4657"
-#tenant_id           = "f2716ff5-b2ec-46c4-a1e7-fa482bf4b365"  # Also known as Bearer realm. If not available, it can be found by looking at the headers from a get request to https://<target_host>/_vti_bin/client.svc with headers={"Authorization":"Bearer"}
-#client_secret       = "J_/-wn6z?nnM7Ztsdi1rqK6KD_fTUx2Y"
-#target_host         = "sesaminternaltesting.sharepoint.com"        # The sharepoint host connected to your Azure app
-#thumbprint          = "80B094282DC306E0FB4F4328107B957271051954"
-
 
 def cert2string(cert_location):
 
