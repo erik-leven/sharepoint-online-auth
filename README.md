@@ -15,3 +15,4 @@ create a public client app in Azure Active Directory" (ADD)
 1.1) Select "New registration" under "App registrations" in the ADD and select "Public client/native (mobile and desktop)" under "Redirect URI (optional)"
 1.2) Select the permissions of the app
 1.3) Select the permissions of different users 
+1.4) Under "Authentication" in your Azure app, set "Treat application as a public client" to "yes"
