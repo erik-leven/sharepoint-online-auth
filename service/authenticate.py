@@ -1,11 +1,9 @@
-# Generate an access token for the SP-RestAPI
+# Generate an access token for the SPO-RestAPI
 
 import requests
 import json
 import logging
 import msal
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
 
 logger = None
 format_string = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -16,15 +14,6 @@ stdout_handler = logging.StreamHandler()
 stdout_handler.setFormatter(logging.Formatter(format_string))
 logger.addHandler(stdout_handler)
 logger.setLevel(logging.DEBUG)
-
-
-
-def cert2string(cert_location):
-
-    backend = default_backend()
-    with open(cert_location, 'rb') as f:
-        crt_data = f.read()
-    return crt_data
 
 def get_access_token_basic_auth(client_id, tenant_id, target_host, username, password, scopes = None):
     if client_id == None:
@@ -44,7 +33,7 @@ def get_access_token_basic_auth(client_id, tenant_id, target_host, username, pas
         AssertionError
     if scopes == None:
         logger.info("Using default scope")
-        scopes = "https://" + target_host + "/.default"
+        scopes = ["https://" + target_host + "/.default"]
     if type(scopes) != list:
         logger.error("The variable 'scopes' much be a list")
         AssertionError
@@ -90,7 +79,7 @@ def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_ho
     return req.json()
 
 
-def get_access_token_oath2_certificate(client_id, tenant_id, target_host, private_key_location, thumbprint, scopes = None):
+def get_access_token_oath2_certificate(client_id, tenant_id, target_host, private_key, thumbprint, scopes = None):
     if client_id == None:
         logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
         AssertionError
@@ -100,22 +89,21 @@ def get_access_token_oath2_certificate(client_id, tenant_id, target_host, privat
     if target_host == None:
         logger.error("Missing target_host. Exiting..")
         AssertionError
-    if private_key_location == None:
-        logger.error("Missing private_key_location. Exiting..")
+    if private_key == None:
+        logger.error("Missing private_key. Exiting..")
         AssertionError
     if thumbprint == None:
         logger.error("Missing thumbprint. Exiting..")
         AssertionError
     if scopes == None:
         logger.info("Using default scope")
-        scopes = "https://" + target_host + "/.default"
+        scopes = ["https://" + target_host + "/.default"]
     if type(scopes) != list:
         logger.error("The variable 'scopes' much be a list")
         AssertionError
 
-    key  = cert2string(private_key_location)
     authority = "https://login.microsoftonline.com/" + tenant_id
-    client_credential = {"private_key": key, "thumbprint": thumbprint}
+    client_credential = {"private_key": private_key, "thumbprint": thumbprint}
     app = msal.ConfidentialClientApplication(client_id = client_id, client_credential=client_credential, authority=authority, validate_authority=True, token_cache=None, verify=True, proxies=None, timeout=None, client_claims=None, app_name=None, app_version=None)
     result = app.acquire_token_for_client(scopes)
     try:
