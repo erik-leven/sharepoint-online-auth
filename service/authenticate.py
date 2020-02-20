@@ -25,7 +25,7 @@ create a web-app in Azure Active Directory" (ADD)
 import requests
 import json
 import logging
-import asal
+import msal
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 
