@@ -1,25 +1,3 @@
-
-"""
-Web-client:
-create a web-app in Azure Active Directory" (ADD)
-1.1) Select "New registration" under "App registrations" in the ADD and select "Web" under "Redirect URI (optional)"
-1.2) Create a secret or upload a certificate for authentication to azure
-1.3.1) Secret: Enter your newely registered app. Select "Certificates & secrets" in the "manage" view. Click on "New client secret" and copy the Value.
-1.3.2) Certificate: Save the private key of the certificate (the whole file). Upload the public key of your certifcate (.cer-, .pem- or .crt-file) and copy the thumbprint generated as you upload the public key.
-1.3.2.1) Example of generating a certificate: 
-		openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
-		The line above will (on Ubuntu at least) generate 2 files, cert.pem (public key) and key.prm (private key).
-
-1.4) Configure permissions (scopes) for the new app under the "API permissions" view inside the "manage" view of your app. An admin needs to "Grant admin consent for <app-name>" to validate the persmissions" 
-
-Public-client:
-create a web-app in Azure Active Directory" (ADD)
-1.1) Select "New registration" under "App registrations" in the ADD and select "Public client/native (mobile and desktop)" under "Redirect URI (optional)"
-1.2) Select the permissions of the app
-1.3) Select the permissions of different users 
-
-"""
-
 # Generate an access token for the SP-RestAPI
 
 import requests
@@ -49,23 +27,23 @@ def cert2string(cert_location):
     return crt_data
 
 def get_access_token_basic_auth(client_id, tenant_id, target_host, username, password, scopes = None):
-    import msal
     if client_id == None:
-        logger.error("Missing client_id. Exiting..")
+        logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
         AssertionError
     if tenant_id == None:
-        logger.error("Missing tenant_id. Exiting..")
+        logger.error("Missing tenant_id. Can be found in 'Overview' in Azure Active Directory. Exiting..")
         AssertionError
     if target_host == None:
-        logger.error("Missing target_host. Exiting..")
+        logger.error("Missing target_host. I.e. <mycompany.sharepoint.com>. Exiting..")
         AssertionError
     if username == None:
-        logger.error("Missing username. Exiting..")
+        logger.error("Missing username. I.e. <first_name.last_name@<my_company.onmicrosoft.com>. Exiting..")
         AssertionError
     if password == None:
         logger.error("Missing password. Exiting..")
         AssertionError
     if scopes == None:
+        logger.info("Using default scope")
         scopes = "https://" + target_host + "/.default"
     if type(scopes) != list:
         logger.error("The variable 'scopes' much be a list")
@@ -86,13 +64,13 @@ def get_access_token_basic_auth(client_id, tenant_id, target_host, username, pas
 
 def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_host):
     if client_id == None:
-        logger.error("Missing client_id. Exiting..")
+        logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
+        AssertionError
+    if tenant_id == None:
+        logger.error("Missing tenant_id. Can be found in 'Overview' in Azure Active Directory. Exiting..")
         AssertionError
     if client_secret == None:
         logger.error("Missing client_secret. Exiting..")
-        AssertionError
-    if tenant_id == None:
-        logger.error("Missing tenant_id. Exiting..")
         AssertionError
     if target_host == None:
         logger.error("Missing target_host. Exiting..")
@@ -112,12 +90,12 @@ def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_ho
     return req.json()
 
 
-def get_access_token_oath2_certificate(client_id, tenant_id, target_host, private_key_location, thumbprint, scopes):
+def get_access_token_oath2_certificate(client_id, tenant_id, target_host, private_key_location, thumbprint, scopes = None):
     if client_id == None:
-        logger.error("Missing client_id. Exiting..")
+        logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
         AssertionError
     if tenant_id == None:
-        logger.error("Missing tenant_id. Exiting..")
+        logger.error("Missing tenant_id. Can be found in 'Overview' in Azure Active Directory. Exiting..")
         AssertionError
     if target_host == None:
         logger.error("Missing target_host. Exiting..")
@@ -129,6 +107,7 @@ def get_access_token_oath2_certificate(client_id, tenant_id, target_host, privat
         logger.error("Missing thumbprint. Exiting..")
         AssertionError
     if scopes == None:
+        logger.info("Using default scope")
         scopes = "https://" + target_host + "/.default"
     if type(scopes) != list:
         logger.error("The variable 'scopes' much be a list")
