@@ -1,5 +1,5 @@
 # Sharepoint authentication for access token via Azure  
-Library for receiving access tokens for Azure apps.
+Library for receiving access tokens for Azure apps. Only supports Sharepoint Online at the moment.
 
 
 ## Azure setup:
@@ -29,3 +29,5 @@ Library for receiving access tokens for Azure apps.
 2. Select the permissions of the app
 3. Select the permissions of different users 
 4. Under *Authentication* in your Azure app, set *Treat application as a public client* to *yes*
+
+# Functions
