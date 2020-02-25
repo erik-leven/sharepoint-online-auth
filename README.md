@@ -41,8 +41,22 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
     - target_host: The host-url, i.e. *<my-company>.sharepoint.com* 
     - username:    Your given username, i.e. <my>.<name>@<my-company>.onmicrosoft.com 
     - password:    Your password
-    - scopes:      Is needed, specify the name of the scope. Should be provided by the Azure admin 
+    - scopes:      If needed, specify the name of the scope. Should be provided by the Azure admin. If not given, will be set to the default scope. 
     - kwargs:      See docs for [msal.PublicClientApplication][https://msal-python.readthedocs.io/en/latest/]  
 
   - Returns:
-    - The autentication payload, including the access-token
+    - The autentication payload, including the access token
+
+### get_access_token_oath2_secret
+client_id, client_secret, tenant_id, target_host, target_identifier
+
+*Obtain access token from client-secret authentication* 
+  - Parameters: 
+    - client_id:         The client (application) id of the Azure app 
+    - client_secret:     The client (application) id of the Azure app 
+    - tenant_id:         The tenats (directory) id of your Azure instance 
+    - target_host:       The host-url, i.e. *<my-company>.sharepoint.com* 
+    - target_identifier: For Sharepoint, this takes the value *00000003-0000-0ff1-ce00-000000000000*
+
+  - Returns:
+    - The autentication payload, including the access token
