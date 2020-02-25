@@ -6,7 +6,7 @@ Library for receiving access tokens for Azure apps.
 *Create a web-app in Azure Active Directory (ADD)*
 
 
-1. Select *New registration* under *App registrations* in ADD and select *Web* under *Redirect URI (optional)*
+1. Enter *New registration* under *App registrations* in ADD and select *Web* under *Redirect URI (optional)*
 
 2. Set credentials
 
@@ -14,7 +14,8 @@ Library for receiving access tokens for Azure apps.
         Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.
 
     2.2. Certificate 
-        2.2.1 Example of generating a certificate: 
+        
+        - 2.2.1 Example of generating a certificate: 
 
         ```
         openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
