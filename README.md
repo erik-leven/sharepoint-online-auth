@@ -41,7 +41,7 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
     - username:    Your given username, i.e. <my>.<name>@<my-company>.onmicrosoft.com 
     - password:    Your password
     - scopes:      If needed, specify the name of the scope. Should be provided by the Azure admin. If not given, will be set to the default scope. 
-    - kwargs:      See docs for [msal.PublicClientApplication][https://msal-python.readthedocs.io/en/latest/]  
+    - kwargs:      See docs for [msal.PublicClientApplication](https://msal-python.readthedocs.io/en/latest/)
 
   - Returns:
     - The autentication payload, including the access token
@@ -67,7 +67,7 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
     - private_key: The private key generated (see description above). Must be a valid string. This library also contains a function to convert .pem files to strings if needed (cert2string).
     - thumbprint:  The thumbprint generated when uploading the certificate to Azure.  
     - scopes:      If needed, specify the name of the scope. Should be provided by the Azure admin. If not given, will be set to the default scope. 
-    - kwargs:      See docs for [msal.ConfidentialClientApplication][https://msal-python.readthedocs.io/en/latest/]  
+    - kwargs:      See docs for [msal.ConfidentialClientApplication](https://msal-python.readthedocs.io/en/latest/)  
 
   - Returns:
     - The autentication payload, including the access token
