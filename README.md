@@ -34,8 +34,8 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
 
 ### get_access_token_basic_auth
 
-*Obtain access token from username/password authentication*
-    Parameters:
+*Obtain access token from username/password authentication* \
+    Parameters: \
         client_id:   The client (application) id of the Azure app \
         tenant_id:   The tenats (directory) id of your Azure instance \
         target_host: The host-url, i.e. *<my-company>.sharepoint.com* \
