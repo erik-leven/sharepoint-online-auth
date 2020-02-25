@@ -4,6 +4,7 @@ import requests
 import json
 import logging
 import msal
+from cryptography.hazmat.backends import default_backend
 
 logger = None
 format_string = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -15,7 +16,9 @@ stdout_handler.setFormatter(logging.Formatter(format_string))
 logger.addHandler(stdout_handler)
 logger.setLevel(logging.DEBUG)
 
-def get_access_token_basic_auth(client_id, tenant_id, target_host, username, password, scopes = None):
+
+
+def get_access_token_basic_auth(client_id, tenant_id, target_host, username, password, scopes = None, **kwargs):
     if client_id == None:
         logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
         AssertionError
@@ -37,10 +40,14 @@ def get_access_token_basic_auth(client_id, tenant_id, target_host, username, pas
     if type(scopes) != list:
         logger.error("The variable 'scopes' much be a list")
         AssertionError
-    
     authority = "https://login.microsoftonline.com/{}".format(tenant_id)
-    app = msal.PublicClientApplication(client_id = client_id, authority = authority)
-    result = app.acquire_token_by_username_password(username, password, scopes=scopes)
+    if len(kwargs.items()) == 0:
+        app = msal.PublicClientApplication(client_id = client_id, authority = authority, **kwargs)
+        result = app.acquire_token_by_username_password(username, password, scopes=scopes, **kwargs)
+    else:
+        app = msal.PublicClientApplication(client_id = client_id, authority = authority)
+        result = app.acquire_token_by_username_password(username, password, scopes=scopes)
+
     try:
         result['access_token']
     except KeyError:
@@ -51,7 +58,7 @@ def get_access_token_basic_auth(client_id, tenant_id, target_host, username, pas
     
 
 
-def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_host):
+def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_host, target_identifier):
     if client_id == None:
         logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
         AssertionError
@@ -64,14 +71,17 @@ def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_ho
     if target_host == None:
         logger.error("Missing target_host. Exiting..")
         AssertionError
+    if target_identifier == None:
+        logger.error("Missing target_identifier. Exiting..")
+        AssertionError
 
     grant_type          = "client_credentials"
-    target_identifier   = "00000003-0000-0ff1-ce00-000000000000" # Always the same for Sharepoint
+    #target_identifier   = "00000003-0000-0ff1-ce00-000000000000" # Always the same for Sharepoint
     SO_client_id        = client_id + "/" + target_identifier + "@" + tenant_id
     url = "https://accounts.accesscontrol.windows.net/" + tenant_id + "/tokens/OAuth/2"
     resource = target_identifier + "/" + target_host + "@" + tenant_id
     data = {"client_id": SO_client_id, "client_secret": client_secret, "resource": resource,"grant_type": grant_type} 
-
+    
     req = requests.post(url, headers={'accept': 'application/x-www-form-urlencoded'}, data=data)
     if req.status_code != 200:
         logger.error("Unexpected response status code: %d with response text %s" % (req.status_code, req.text))
@@ -79,7 +89,14 @@ def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_ho
     return req.json()
 
 
-def get_access_token_oath2_certificate(client_id, tenant_id, target_host, private_key, thumbprint, scopes = None):
+def cert2string(cert_location):
+    backend = default_backend()
+    with open(cert_location, 'rb') as f:
+        crt_data = f.read()
+    return crt_data
+
+def get_access_token_oath2_certificate(client_id, tenant_id, target_host, private_key, thumbprint, scopes = None, **kwargs):
+    print(client_id, tenant_id, target_host, private_key, thumbprint, scopes)
     if client_id == None:
         logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
         AssertionError
@@ -104,7 +121,7 @@ def get_access_token_oath2_certificate(client_id, tenant_id, target_host, privat
 
     authority = "https://login.microsoftonline.com/" + tenant_id
     client_credential = {"private_key": private_key, "thumbprint": thumbprint}
-    app = msal.ConfidentialClientApplication(client_id = client_id, client_credential=client_credential, authority=authority, validate_authority=True, token_cache=None, verify=True, proxies=None, timeout=None, client_claims=None, app_name=None, app_version=None)
+    app = msal.ConfidentialClientApplication(client_id = client_id, client_credential=client_credential, authority=authority, validate_authority=True, **kwargs)
     result = app.acquire_token_for_client(scopes)
     try:
         result['access_token']
