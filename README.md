@@ -43,3 +43,6 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
     - password:    Your password
     - scopes:      Is needed, specify the name of the scope. Should be provided by the Azure admin 
     - kwargs:      See docs for [msal.PublicClientApplication][https://msal-python.readthedocs.io/en/latest/]  
+
+  - Returns:
+    - The autentication payload, including the access-token
