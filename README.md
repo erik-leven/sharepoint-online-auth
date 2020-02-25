@@ -24,8 +24,8 @@ Azure setup:\
   2.4. Under *Authentication* in your Azure app, set *Treat application as a public client* to *yes* \
 
 
-##### Functions:\
-```get_access_token_basic_auth```\
+##### Functions
+###### get_access_token_basic_auth
 Obtain access token from username/password authentication*
   - Parameters: 
     - client_id:   The client (application) id of the Azure app 
