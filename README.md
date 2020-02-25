@@ -5,8 +5,8 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
 
 Azure setup:
 
-1. Create a web-app in Azure Active Directory (ADD):
-  1.1. Enter *New registration* under *App registrations* in ADD and select *Web* under *Redirect URI (optional)*
+1. Create a web-app in Azure Active Directory (ADD):\
+  1.1. Enter *New registration* under *App registrations* in ADD and select *Web* under *Redirect URI (optional)*\
   1.2. Set credentials
     1.2.1. Secret:
       Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.
