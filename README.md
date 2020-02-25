@@ -33,7 +33,6 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
 ## Functions
 
 ### get_access_token_basic_auth
-
 *Obtain access token from username/password authentication* 
   - Parameters: 
     - client_id:   The client (application) id of the Azure app 
@@ -48,8 +47,6 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
     - The autentication payload, including the access token
 
 ### get_access_token_oath2_secret
-client_id, client_secret, tenant_id, target_host, target_identifier
-
 *Obtain access token from client-secret authentication* 
   - Parameters: 
     - client_id:         The client (application) id of the Azure app 
@@ -60,3 +57,25 @@ client_id, client_secret, tenant_id, target_host, target_identifier
 
   - Returns:
     - The autentication payload, including the access token
+
+### get_access_token_oath2_certificate
+*Obtain access token from certificate authentication* 
+  - Parameters: 
+    - client_id:   The client (application) id of the Azure app 
+    - tenant_id:   The tenats (directory) id of your Azure instance 
+    - target_host: The host-url, i.e. *<my-company>.sharepoint.com* 
+    - private_key: The private key generated (see description above). Must be a valid string. This library also contains a function to convert .pem files to strings if needed (cert2string).
+    - thumbprint:  The thumbprint generated when uploading the certificate to Azure.  
+    - scopes:      If needed, specify the name of the scope. Should be provided by the Azure admin. If not given, will be set to the default scope. 
+    - kwargs:      See docs for [msal.ConfidentialClientApplication][https://msal-python.readthedocs.io/en/latest/]  
+
+  - Returns:
+    - The autentication payload, including the access token
+
+### cert2string
+*Convert the content of a certificate to a string*
+  - Parameters: 
+    - cert_location: The location of your private key. 
+
+  - Returns:
+    - The private key converted to a string.
