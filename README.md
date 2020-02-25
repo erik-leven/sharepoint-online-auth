@@ -9,7 +9,7 @@ Azure setup:\
   1.2. Set credentials\
     1.2.1. Secret: 
       \
-      Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.\
+        Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.\
     1.2.2. Certificate:
       ```
         openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
