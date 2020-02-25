@@ -31,10 +31,9 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
 4. Under *Authentication* in your Azure app, set *Treat application as a public client* to *yes*
 
 ## Functions
-```
-get_access_token_basic_auth(client_id, tenant_id, target_host, username, password, scopes = None, **kwargs)
-```
-   \
+
+###get_access_token_basic_auth
+
 Obtain access token from username/password authentication\
     \
     Parameters:
