@@ -11,6 +11,7 @@ Library for receiving access tokens for Azure apps.
 2. Set credentials
 
     2.1. Secret:
+    
     Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.
 
     2.2. Certificate 
