@@ -16,8 +16,6 @@ stdout_handler.setFormatter(logging.Formatter(format_string))
 logger.addHandler(stdout_handler)
 logger.setLevel(logging.DEBUG)
 
-
-
 def get_access_token_basic_auth(client_id, tenant_id, target_host, username, password, scopes = None, **kwargs):
     if client_id == None:
         logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
@@ -55,9 +53,6 @@ def get_access_token_basic_auth(client_id, tenant_id, target_host, username, pas
         raise AssertionError  
     return result
 
-    
-
-
 def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_host, target_identifier):
     if client_id == None:
         logger.error("Missing client_id. Can be found in 'App registrations' in Azure Active Directory. Exiting..")
@@ -75,19 +70,16 @@ def get_access_token_oath2_secret(client_id, client_secret, tenant_id, target_ho
         logger.error("Missing target_identifier. Exiting..")
         AssertionError
 
-    grant_type          = "client_credentials"
-    #target_identifier   = "00000003-0000-0ff1-ce00-000000000000" # Always the same for Sharepoint
-    SO_client_id        = client_id + "/" + target_identifier + "@" + tenant_id
-    url = "https://accounts.accesscontrol.windows.net/" + tenant_id + "/tokens/OAuth/2"
-    resource = target_identifier + "/" + target_host + "@" + tenant_id
-    data = {"client_id": SO_client_id, "client_secret": client_secret, "resource": resource,"grant_type": grant_type} 
-    
+    SO_client_id = client_id + "/" + target_identifier + "@" + tenant_id
+    resource     = target_identifier + "/" + target_host + "@" + tenant_id
+    data         = {"client_id": SO_client_id, "client_secret": client_secret, "resource": resource,"grant_type": "client_credentials"} 
+    url          = "https://accounts.accesscontrol.windows.net/" + tenant_id + "/tokens/OAuth/2"
+
     req = requests.post(url, headers={'accept': 'application/x-www-form-urlencoded'}, data=data)
     if req.status_code != 200:
         logger.error("Unexpected response status code: %d with response text %s" % (req.status_code, req.text))
         raise AssertionError    
     return req.json()
-
 
 def cert2string(cert_location):
     backend = default_backend()
