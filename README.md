@@ -2,9 +2,9 @@
 Library for receiving access tokens for Azure apps.
 
 
-## Web-client:
-*Create a web-app in Azure Active Directory (ADD)*
+## Azure setup:
 
+*Create a web-app in Azure Active Directory (ADD)*
 
 1. Enter *New registration* under *App registrations* in ADD and select *Web* under *Redirect URI (optional)*
 
