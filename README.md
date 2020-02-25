@@ -14,9 +14,7 @@ Library for receiving access tokens for Azure apps.
         Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.
 
     2.2. Certificate 
-        
-        - 2.2.1 Example of generating a certificate: 
-
+        2.2.1 Example of generating a certificate:
         ```
         openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
         ```
