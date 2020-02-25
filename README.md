@@ -19,11 +19,9 @@ Library for receiving access tokens for Azure apps.
         ```
         \
         The line above will (on Ubuntu at least) generate 2 files, cert.pem (public key) and key.prm (private key). 
-
-        2.2.2. Setting the certificate credentials
         Save the private key of the certificate (as a string). Upload the public key of your certifcate (.cer-, .pem- or .crt-file) and copy the thumbprint generated as you upload the public key.
 
-3) Configure permissions (scopes) for the new app under the *API permissions* view inside the *manage* view of your app. An admin needs to *Grant admin consent for <app_name> to validate the persmissions* 
+3. Configure permissions (scopes) for the new app under the *API permissions* view inside the *manage* view of your app. An admin needs to *Grant admin consent for <app_name> to validate the persmissions* 
 
 *Create a Public-client in Azure Active Directory*:
 
