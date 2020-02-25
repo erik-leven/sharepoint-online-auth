@@ -13,9 +13,7 @@ Library for receiving access tokens for Azure apps.
     2.1. Secret:
         Enter your newely registered app. Select *Certificates & secrets* in the *manage* view. Click on *New client secret* and copy the Value.
 
-    2.2. Certificate:
-
-        
+    2.2. Certificate: \
             openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
         
         The line above will (on Ubuntu at least) generate 2 files, cert.pem (public key) and key.prm (private key). 
