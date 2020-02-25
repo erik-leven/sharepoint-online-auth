@@ -38,8 +38,8 @@ Obtain access token from username/password authentication*
 
   - Returns:
     - The autentication payload, including the access token\
-\
-```get_access_token_oath2_secret```\
+
+#### get_access_token_oath2_secret
 Obtain access token from client-secret authentication 
   - Parameters: 
     - client_id:         The client (application) id of the Azure app 
