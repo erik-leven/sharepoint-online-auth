@@ -37,7 +37,7 @@ Obtain access token from username/password authentication*
     - kwargs:      See docs for [msal.PublicClientApplication](https://msal-python.readthedocs.io/en/latest/)
 
   - Returns:
-    - The autentication payload, including the access token
+    - The autentication payload, including the access token\
 \
 ```get_access_token_oath2_secret```\
 Obtain access token from client-secret authentication 
@@ -49,7 +49,7 @@ Obtain access token from client-secret authentication
     - target_identifier: For Sharepoint, this takes the value *00000003-0000-0ff1-ce00-000000000000*
 
   - Returns:
-    - The autentication payload, including the access token
+    - The autentication payload, including the access token\
 \
 ```get_access_token_oath2_certificate```\
 Obtain access token from certificate authentication
@@ -63,7 +63,7 @@ Obtain access token from certificate authentication
     - kwargs:      See docs for [msal.ConfidentialClientApplication](https://msal-python.readthedocs.io/en/latest/)  
 
   - Returns:
-    - The autentication payload, including the access token
+    - The autentication payload, including the access token\
 \
 ```cert2string```\
 Convert the content of a certificate to a string
