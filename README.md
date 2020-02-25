@@ -51,7 +51,7 @@ Obtain access token from client-secret authentication
   - Returns:
     - The autentication payload, including the access token\
 
-##### get_access_token_oath2_certificate
+###### get_access_token_oath2_certificate
 Obtain access token from certificate authentication
   - Parameters: 
     - client_id:   The client (application) id of the Azure app 
@@ -65,7 +65,7 @@ Obtain access token from certificate authentication
   - Returns:
     - The autentication payload, including the access token\
 
-##### cert2string
+###### cert2string
 Convert the content of a certificate to a string
   - Parameters: 
     - cert_location: The location of your private key. 
