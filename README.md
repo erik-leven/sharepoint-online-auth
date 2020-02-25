@@ -32,7 +32,7 @@ Library for receiving access tokens for Azure apps. Only supports Sharepoint Onl
 
 ## Functions
 
-###get_access_token_basic_auth
+### get_access_token_basic_auth
 
 Obtain access token from username/password authentication\
     \
